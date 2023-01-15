@@ -24,14 +24,12 @@ class TextCNN(nn.Module):
         self.output = nn.Linear(len(kernel_sizes) * kernel_num, n_labels)
 
     def forward(self, x):
-        # input_batch : [n_step, batch_size, embedding size]
         x = self.embedding(x).unsqueeze(1)
         x = [F.relu(conv(x)).squeeze(3) for conv in self.convs]
         x = [F.max_pool1d(item, item.size(2)).squeeze(2) for item in x]
         x = torch.cat(x, 1)
         x = self.dropout(x)
         logits = self.output(x)
-        # logits = F.log_softmax(self.output(x), dim=1)
         return logits
 
 
