@@ -1,0 +1,12 @@
+python bert.py \
+    --model "../pretrained_models/bert-base-chinese" \
+    --train_path "data/train.txt" \
+    --dev_path "data/dev.txt" \
+    --save_dir "checkpoints/" \
+    --n_labels 8 \
+    --batch_size 16 \
+    --max_seq_len 128 \
+    --valid_steps 50 \
+    --logging_steps 10 \
+    --n_epochs 20 \
+    --device "cuda:0"
